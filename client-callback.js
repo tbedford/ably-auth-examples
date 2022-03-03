@@ -5,7 +5,7 @@ const options = {
   hostname: process.env.HOSTNAME,
   port: 443, // SSL
   path: "/auth",
-  method: "GET",
+  method: "POST",
   headers: {
     "User-Agent": "IoT client v0.2", // will fail on Glitch if you don't set this to something
     username: process.env.USERNAME,
