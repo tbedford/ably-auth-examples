@@ -38,7 +38,7 @@ USERNAME=username
 PASSWORD=password
 ```
 
-## Usage
+## Testing Glitch server
 
 Once the server is running, you can test it with:
 
@@ -46,9 +46,13 @@ Once the server is running, you can test it with:
 curl https://mahogany-gusty-paint.glitch.me
 ```
 
-This will return a simple HTML page. You'll need to change the hostname to match your hostname on Glitch.
+This will return a simple HTML page. You'll need to change the hostname to match your hostname on Glitch. Also, check your Glitch logs for any errors.
 
-You can then test the IoT client using `authCallback` with:
+**NOTE:** On the Glitch server, the TTL in the TokenRequest is set to the value of 2 minutes, for test purposes. In a real application you'll want to set a higher value to reduce load on your auth server.
+
+## AuthCallback client
+
+You can test the IoT client using `authCallback` with:
 
 ```shell
 node client-callback.js
@@ -70,10 +74,16 @@ Time of token renewal: Wed Mar 02 2022 16:46:48 GMT+0000 (Greenwich Mean Time)
 Connected
 ```
 
-**NOTE: On the Glitch server, the TTL in the TokenRequest is set to the value of 2 minutes, for test purposes. In a real application you'll want to set a higher value to reduce load on your auth server.
+Note this example uses the `authParam` set to `POST`, and important information in the `authHeaders`.
+
+##  AuthUrl client
 
 You can test the IoT client using `authUrl` with:
 
 ```shell
 node client-authurl.js
 ```
+
+Note this example uses the default `authMethod` of `GET` and important information passed in the query string. 
+
+**Note:** When using HTTPS, the URL path and query string parameters are encrypted, as are `POST` bodies.
