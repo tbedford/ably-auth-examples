@@ -18,13 +18,11 @@ const ably = new require("ably").Realtime({
     const req = https.request(options, (res) => {
       console.log(`statusCode: ${res.statusCode}`);
       if (res.statusCode == 200) {
-        res.on("data", (d) => {
-          tokenRequest = d.toString();
-          tokenRequest = JSON.parse(tokenRequest);
-          console.log(tokenRequest);
+        res.on("data", (tokenRequest) => {
+          console.log('TokenRequest: --->' + tokenRequest);
           const time = new Date();
           console.log(`Time of token renewal: ${time}`);
-          callback(null, tokenRequest);
+          callback(null, JSON.parse(tokenRequest));
         });
       } else {
         console.error("Response code was not 200.");
