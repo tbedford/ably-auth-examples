@@ -40,10 +40,10 @@ const ably = new require("ably").Realtime({
   },
 });
 
-ably.connection.on("connecting", function () {
+ably.connection.on("connecting", () => {
   console.log("Connecting to Ably...");
 });
 
-ably.connection.on("connected", function () {
+ably.connection.on("connected", () => {
   console.log("Connected");
 });
