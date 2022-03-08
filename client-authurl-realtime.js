@@ -1,9 +1,9 @@
 require("dotenv").config();
-const Ably = require("ably");
+const ably = require("ably");
 const authUrl = "https://" + process.env.HOSTNAME + "/auth";
 const authHeaders = { "User-Agent": "IoT client v0.2" };
 
-const ably = new Ably.Realtime({
+const realtime = new ably.Realtime({
   authUrl: authUrl,
   authParams: {
     username: process.env.USERNAME,
@@ -12,10 +12,10 @@ const ably = new Ably.Realtime({
   authHeaders: authHeaders,
 });
 
-ably.connection.on("connecting", () => {
+realtime.connection.on("connecting", () => {
   console.log("Connecting to Ably...");
 });
 
-ably.connection.on("connected", () => {
+realtime.connection.on("connected", () => {
   console.log("Connected");
 });

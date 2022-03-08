@@ -1,5 +1,6 @@
 const https = require("https");
 require("dotenv").config();
+const ably = require("ably");
 
 const options = {
   hostname: process.env.HOSTNAME,
@@ -13,7 +14,7 @@ const options = {
   },
 };
 
-const ably = new require("ably").Realtime({
+const realtime = ably.Realtime({
   authCallback: (tokenParams, callback) => {
     const req = https.request(options, (res) => {
       console.log(`statusCode: ${res.statusCode}`);
@@ -40,10 +41,10 @@ const ably = new require("ably").Realtime({
   },
 });
 
-ably.connection.on("connecting", () => {
+realtime.connection.on("connecting", () => {
   console.log("Connecting to Ably...");
 });
 
-ably.connection.on("connected", () => {
+realtime.connection.on("connected", () => {
   console.log("Connected");
 });

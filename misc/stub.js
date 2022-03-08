@@ -3,18 +3,18 @@ require("dotenv").config();
 const ably = require("ably");
 
 const options = {
-  hostname: process.env.HOSTNAME,
-  port: 443, // SSL
-  path: "/auth",
-  method: "POST",
-  headers: {
-    "User-Agent": "IoT client v0.2", // will fail on Glitch if you don't set this to something
-    username: process.env.USERNAME,
-    password: process.env.PASSWORD,
-  },
-};
-
-const rest = ably.Rest({
+    hostname: process.env.HOSTNAME,
+    port: 443, // SSL
+    path: "/auth",
+    method: "POST",
+    headers: {
+      "User-Agent": "IoT client v0.2", // will fail on Glitch if you don't set this to something
+      username: process.env.USERNAME,
+      password: process.env.PASSWORD,
+    },
+  };
+  
+const realtime = ably.Realtime({
   authCallback: (tokenParams, callback) => {
     const req = https.request(options, (res) => {
       console.log(`statusCode: ${res.statusCode}`);
@@ -41,9 +41,10 @@ const rest = ably.Rest({
   },
 });
 
-const channel = rest.channels.get("ably-time-server");
-channel.publish("message_label", "This is some data", () => {
-  channel.history((err, resultPage) => {
-    console.log("Last published message:" + resultPage.items[0]);
-  });
+realtime.connection.on("connecting", () => {
+  console.log("Connecting to Ably...");
+});
+
+realtime.connection.on("connected", () => {
+  console.log("Connected");
 });
