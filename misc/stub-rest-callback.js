@@ -1,6 +1,6 @@
-const ably = require("ably");
+const Ably = require("ably");
 
-const rest = ably.Rest({
+const rest = Ably.Rest({
   authCallback: (tokenParams, callback) => {
     // implement your callback here
   },

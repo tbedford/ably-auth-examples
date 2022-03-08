@@ -1,9 +1,9 @@
 require("dotenv").config();
-const ably = require("ably");
+const Ably = require("ably");
 const authUrl = "https://" + process.env.HOSTNAME + "/auth";
 const authHeaders = { "User-Agent": "IoT client v0.2" };
 
-const realtime = new ably.Realtime({
+const realtime = Ably.Realtime({
   authUrl: authUrl,
   authParams: {
     username: process.env.USERNAME,
