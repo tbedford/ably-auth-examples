@@ -5,7 +5,7 @@ const authHeaders = { "User-Agent": "IoT client v0.2" };
 
 console.log(authUrl);
 
-const rest = Ably.Rest({
+const rest = new Ably.Rest({
   authUrl: authUrl,
   authParams: {
     username: process.env.USERNAME,

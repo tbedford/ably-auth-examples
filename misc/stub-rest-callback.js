@@ -1,6 +1,6 @@
 const Ably = require("ably");
 
-const rest = Ably.Rest({
+const rest = new Ably.Rest({
   authCallback: (tokenParams, callback) => {
     // implement your callback here
   },

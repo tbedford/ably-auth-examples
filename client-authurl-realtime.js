@@ -3,7 +3,7 @@ const Ably = require("ably");
 const authUrl = "https://" + process.env.HOSTNAME + "/auth";
 const authHeaders = { "User-Agent": "IoT client v0.2" };
 
-const realtime = Ably.Realtime({
+const realtime = new Ably.Realtime({
   authUrl: authUrl,
   authParams: {
     username: process.env.USERNAME,

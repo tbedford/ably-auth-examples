@@ -14,7 +14,7 @@ const options = {
   },
 };
 
-const realtime = Ably.Realtime({
+const realtime = new Ably.Realtime({
   authCallback: (tokenParams, callback) => {
     const req = https.request(options, (res) => {
       console.log(`statusCode: ${res.statusCode}`);

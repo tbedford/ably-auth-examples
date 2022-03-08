@@ -1,6 +1,6 @@
 const Ably = require("ably");
 
-const realtime = Ably.Realtime({
+const realtime = new Ably.Realtime({
   authCallback: (tokenParams, callback) => {
     // implement your callback here
   },
